@@ -15,6 +15,9 @@ export DEPLOY_PIPEWIRE=1
 # Deploy dependencies
 quick-sharun /usr/bin/whatsie
 
+# Qt 6.12 breaks the Qt WebEngine path resolution done by quick-sharun
+install -Dm644 ./qt-webengine.hook ./AppDir/bin/05-qt-webengine.hook
+
 # Turn AppDir into AppImage
 quick-sharun --make-appimage
 

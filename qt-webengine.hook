@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Qt 6.12 no longer applies the Prefix from the qt.conf that quick-sharun
+# generates, so Qt WebEngine now looks for its resources in share/qt6 and for
+# its process binary in the application dir (shared/bin), while quick-sharun
+# deploys them in lib/qt6 and as a sharun wrapper in bin
+if [ -f "$APPDIR"/lib/qt6/resources/qtwebengine_resources.pak ]; then
+	export QTWEBENGINE_RESOURCES_PATH="$APPDIR"/lib/qt6/resources
+fi
+if [ -d "$APPDIR"/lib/qt6/translations/qtwebengine_locales ]; then
+	export QTWEBENGINE_LOCALES_PATH="$APPDIR"/lib/qt6/translations/qtwebengine_locales
+fi
+if [ -f "$APPDIR"/bin/QtWebEngineProcess ]; then
+	export QTWEBENGINEPROCESS_PATH="$APPDIR"/bin/QtWebEngineProcess
+fi
